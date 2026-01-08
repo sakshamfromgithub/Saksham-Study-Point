@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  background: linear-gradient(135deg, #2b2f77, #4b50c7);
+  background: linear-gradient(135deg, #4d1616, #9b2b2b);
   color: #fff;
   padding: 30px 20px;
   text-align: center;
@@ -26,7 +26,7 @@ header img {
 }
 
 nav {
-  background: #1f225c;
+  background: #4d1616;
   padding: 12px;
   text-align: center;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
@@ -66,7 +66,7 @@ nav a:hover {
 }
 
 h2 {
-  color: #2b2f77;
+  color: #4d1616;
   margin-bottom: 15px;
 }
 
@@ -93,11 +93,11 @@ h2 {
 
 .book h3 {
   margin: 15px 0 10px;
-  color: #1f225c;
+  color: #4d1616;
 }
 
 footer {
-  background: linear-gradient(135deg, #2b2f77, #4b50c7);
+  background: linear-gradient(135deg, #4d1616, #931a1a);
   color: #fff;
   text-align: center;
   padding: 18px;
@@ -204,7 +204,7 @@ a:hover {
 .modal-box button {
   width: 100%;
   padding: 10px;
-  background: #6c63ff;
+  background: #4d1616;
   color: white;
   border: none;
   border-radius: 6px;
@@ -212,7 +212,7 @@ a:hover {
 }
 
 .modal-box span {
-  color: #6c63ff;
+  color: #4d1616;
   cursor: pointer;
 }
 
