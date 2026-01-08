@@ -1,0 +1,229 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(circle at top, #eef1ff, #cfd6ff);
+  color: #333;
+}
+
+header {
+  background: linear-gradient(135deg, #2b2f77, #4b50c7);
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);
+}
+
+header img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #fff;
+  padding: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  margin-bottom: 12px;
+}
+
+nav {
+  background: #1f225c;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+nav a {
+  color: #fff;
+  margin: 0 18px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+nav a:hover {
+  color: #ffd86b;
+}
+
+.container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  background: linear-gradient(145deg, #ffffff, #e6e9ff);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.15),
+    -12px -12px 25px rgba(255, 255, 255, 0.7);
+  margin-bottom: 35px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 18px 18px 35px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+  color: #2b2f77;
+  margin-bottom: 15px;
+}
+
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  perspective: 1000px;
+}
+
+.book {
+  background: linear-gradient(145deg, #fdfdff, #e0e4ff);
+  border-radius: 14px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.18);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.book:hover {
+  transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+.book h3 {
+  margin: 15px 0 10px;
+  color: #1f225c;
+}
+
+footer {
+  background: linear-gradient(135deg, #2b2f77, #4b50c7);
+  color: #fff;
+  text-align: center;
+  padding: 18px;
+  margin-top: 40px;
+  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* RESPONSIVE + INTERACTIVE DESIGN */
+@media (max-width: 900px) {
+  nav {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  nav div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .container {
+    padding: 25px 15px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 20px 15px;
+  }
+
+  header h1 {
+    font-size: 26px;
+  }
+
+  nav a {
+    display: block;
+    margin: 8px 0;
+  }
+
+  .books {
+    grid-template-columns: 1fr;
+  }
+
+  .book {
+    transform: none !important;
+  }
+}
+/* BUTTON INTERACTION */
+button,
+a {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+/* SLIDER TOUCH FRIENDLY */
+.slider img {
+  width: 100%;
+  height: auto;
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 25px;
+  width: 320px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.modal-box h2 {
+  text-align: center;
+}
+
+.modal-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.modal-box button {
+  width: 100%;
+  padding: 10px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-box span {
+  color: #6c63ff;
+  cursor: pointer;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  color: #333;
+  font-size: 18px;
+}
+a {
+  color: #fff;
+}
