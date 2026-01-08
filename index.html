@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saksham Study Point</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1306284201339255"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+    <header>
+        <!-- Logo yahan lagao: logo.png -->
+        <img src="logo.png" alt="Saksham Study Point Logo" />
+        <h1>Saksham Study Point</h1>
+        <p>Students ke future ko shape dene wali books </p>
+    </header>
+
+    <nav style="display:flex;align-items:center;justify-content:space-between;padding:12px 30px;">
+        <div style="display:flex;align-items:center;gap:25px;">
+            <a href="#">Books</a>
+            <a href="#">Notes</a>
+            <a href="#">Exams</a>
+            <a href="#">About</a>
+
+
+        </div>
+
+
+        <div>
+            <span id="userName" style="color:white;margin-right:15px;"></span>
+
+            <button onclick="openModal()" id="loginBtn"
+                style="background: #6c63ff; color:white;padding:10px 18px;border-radius:8px;border:none;">
+                Login / Register
+            </button>
+
+
+            <button id="uploadBtn" style="display:none;background:#00c853;color:white;padding:10px 18px;
+                border-radius:8px;border:none;font-weight:600;cursor:pointer;">
+                📤 Upload PDF
+            </button>
+
+
+
+            <button id="logoutBtn" onclick="logout()"
+                style="display:none;background:#ff4d4d;color:white;padding:10px 18px;border-radius:8px;border:none;">
+                Logout
+            </button>
+        </div>
+    </nav>
+
+
+
+
+    <!-- SLIDER SECTION -->
+    <section style="background:#f4f6fb;padding:60px 0;">
+        <h2 style="text-align:center;color:#2b2f77;font-size:36px;margin-bottom:30px;">Featured Programs</h2>
+        <div class="slider" style="max-width:1100px;margin:auto;overflow:hidden;position:relative;">
+            <div class="slides" style="display:flex;animation:slide 15s infinite;">
+                <img src="slide1.jpg" style="width:100%;flex-shrink:0;border-radius:20px;" />
+                <img src="slide2.jpg" style="width:100%;flex-shrink:0;border-radius:20px;" />
+                <img src="slide3.jpg" style="width:100%;flex-shrink:0;border-radius:20px;" />
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes slide {
+            0% {
+                transform: translateX(0)
+            }
+
+            33% {
+                transform: translateX(-100%)
+            }
+
+            66% {
+                transform: translateX(-200%)
+            }
+
+            100% {
+                transform: translateX(0)
+            }
+        }
+    </style>
+
+    <div class="container" id="home">
+        <div class="card">
+            <h2>Saksham Study Point</h2>
+            <p>
+
+                Quality Educational Books Designed for Students
+
+                Saksham Study Point is a student-focused educational platform that provides high-quality books and
+                study resources
+                for school and exam preparation.
+                Our goal is to help students understand concepts clearly, build confidence, and prepare effectively for
+                exams.
+            </p>
+        </div>
+
+        <div class="card" id="books">
+            <h2>Book Store</h2>
+            <p>
+                Explore our collection of educational books created for students.
+                Each book is based on the NCERT curriculum and designed to support both learning and exam preparation.
+
+                Detailed information about each book is available on its individual page to help students choose the
+                right study
+                material.</p>
+            <div class="books">
+                <div class="book">
+                    <h3>NCERT PHYSICS 1</h3>
+                    <p>All subjects | Board focused</p>
+                    <p><strong>Free PDF</strong></p>
+                    <button onclick="openPDF('ncertphy1.pdf')"
+                        style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:8px;background:#6c63ff;color:#fff;text-decoration:none;font-weight:600;">
+                        Download PDF
+                    </button>
+                </div>
+                <div class="book">
+                    <h3>NCERT PHYSICS 2</h3>
+                    <p>Concept + PYQs</p>
+                    <p><strong>Free PDF</strong></p>
+                    <button onclick="openPDF('ncertphy2.pdf')"
+                        style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:8px;background:#6c63ff;color:#fff;text-decoration:none;font-weight:600;">
+                        Download PDF
+                    </button>
+                </div>
+                <div class="book">
+                    <h3>NCERT PHYSICS 3</h3>
+                    <p>Concept</p>
+                    <p><strong>Free PDF</strong></p>
+                    <button onclick="openPDF('ncertphy3.pdf')"
+                        style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:8px;background:#6c63ff;color:#fff;text-decoration:none;font-weight:600;">
+                        Download PDF
+                    </button>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="about">
+        <h2>About Us</h2>
+        <p>
+            <b>Welcome to Saksham Study Point</b>
+
+            Saksham Study Point is created with a clear vision: to make learning simple, effective, and
+            accessible for students. <br>
+            We develop educational books and study materials that follow the NCERT syllabus and focus on concept
+            clarity rather than
+            rote learning.
+
+            Many students struggle because they find textbooks confusing or overloaded with information. Our books
+            are carefully
+            designed to explain topics in a clear, structured, and student-friendly manner, so learners can study
+            independently
+            without stress.
+
+            Whether you are preparing for school exams or strengthening your foundation for competitive exams, our
+            content is
+            designed to support your learning journey step by step.
+        </p>
+    </div>
+    <div class="card" id="about">
+        <h2>What We Offer</h2>
+        <p>
+
+            At Saksham Study Point, we offer:
+
+            NCERT-based educational books
+
+            Concept-focused study material
+
+            Easy explanations in simple language
+
+            Exam-oriented content for better preparation
+
+            Each book is prepared after understanding common student problems and learning gaps. Our focus is not
+            just to complete
+            the syllabus, but to ensure that students truly understand what they study.
+
+            We believe that strong fundamentals are the key to academic success. That is why our content avoids
+            unnecessary
+            complexity and keeps learning straightforward and practical.
+        </p>
+    </div>
+    <div class="card" id="about">
+        <h2>How Our Books Help Students</h2>
+        <p>
+            <b>Designed for Better Learning</b><br>
+
+            > Our books are designed to help students: <br>
+
+            > Understand difficult topics easily <br>
+
+            > Build strong fundamentals <br>
+
+            > Improve exam performance <br>
+
+            > Study confidently without confusion <br>
+
+            Every chapter is structured logically, making revision faster and more effective.
+            We focus on quality over quantity, so students spend time learning what truly matters.
+
+            Our material supports self-study and is suitable for students who want clear guidance without relying on
+            multiple
+            resources.
+
+        </p>
+    </div>
+    <div class="card" id="about">
+        <h2>Why Choose Us</h2>
+        <p>
+            <b> 🤝 Why Students Trust Saksham Study Point</b><br>
+
+            Student-first approach
+
+            Clear and structured content
+
+            Honest educational purpose
+
+            Simple language and clean design
+
+            Transparent contact information
+
+            We are committed to maintaining quality and trust in everything we publish.
+        </p>
+
+
+    </div>
+    <div class="card" id="about">
+        <h2>Our Mission</h2>
+        <p>
+            <b> 🎯 Our Mission at Saksham Study Point</b><br>
+
+            Our mission is to provide reliable, easy-to-understand educational books that help students learn with
+            confidence and
+            clarity.
+
+            Saksham Study Point is dedicated to supporting students in their academic journey with quality content
+            and
+            responsible educational practices.
+        </p>
+
+
+    </div>
+
+
+
+
+
+   
+    </div>
+
+
+
+    <input type="file" id="pdfInput" accept="application/pdf" style="display:none;">
+
+    <div id="authModal" class="modal">
+        <div class="modal-box">
+
+            <!-- SIGNUP -->
+            <div id="signupBox">
+                <h2>Create Account</h2>
+                <input type="text" placeholder="Name" id="signupName">
+                <input type="email" placeholder="Email" id="signupEmail">
+                <input type="password" placeholder="Password" id="signupPassword">
+
+                <button onclick="signup()">Sign Up</button>
+
+                <p>
+                    Already have an account?
+                    <span onclick="showLogin()">Login here</span>
+                </p>
+            </div>
+
+            <!-- LOGIN -->
+            <div id="loginBox" style="display:none;">
+                <h2>Login</h2>
+                <input type="email" placeholder="Email" id="loginEmail">
+                <input type="password" placeholder="Password" id="loginPassword">
+
+                <button onclick="login()">Login</button>
+
+                <p>
+                    New user?
+                    <span onclick="showSignup()">Create account</span>
+                </p>
+            </div>
+
+            <button class="closeBtn" onclick="closeModal()"
+                style="width: 20%; background: #fff; color: #000;">✖</button>
+        </div>
+    </div>
+
+
+
+
+    <footer>
+        <p>
+            <a href="privacy.html">Privacy Policy</a> |
+            <a href="terms.html">Terms</a> |
+            <a href="disclaimer.html">Disclaimer</a>
+        </p>
+        <p>© 2026 Saksham Study Point | Designed for Students</p>
+    </footer>
+
+
+    <script type="module" src="main.js"></script>
+
+
+</body>
+
+</html>
