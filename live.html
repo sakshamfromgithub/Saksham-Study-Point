@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Live Class | Saksham Sir</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+        }
+
+        .header {
+            background: #d32f2f;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 15px;
+        }
+
+        .video-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .section {
+            background: white;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .notes a {
+            display: block;
+            margin: 8px 0;
+            color: #0d47a1;
+            text-decoration: none;
+        }
+
+        .notes a:hover {
+            text-decoration: underline;
+        }
+
+        .timetable div {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .live-badge {
+            color: white;
+            background: red;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .chat-box {
+            position: relative;
+            padding-bottom: 60%;
+            height: 0;
+        }
+
+        .chat-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        🔴 Live Class <span class="live-badge">LIVE</span>
+    </div>
+
+    <div class="container">
+
+        <!-- LIVE VIDEO -->
+        <div class="section">
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/p4NFXvpznfo
+" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <!-- NOTES / PDF -->
+        <div class="section notes">
+            <h2>📘 Class Notes / PDFs</h2>
+            <a href="notes1.pdf" target="_blank">➡physics Model Paper class 12(PDF)</a>
+            <a href="formula.pdf" target="_blank">➡ Important Formula Sheet</a>
+        </div>
+
+        <!-- TIMETABLE
+        <div class="section timetable">
+            <h2>📅 Class Timetable</h2>
+            <div>Physics – 6:00 PM <span class="live-badge">LIVE</span></div>
+            <div>Chemistry – 7:00 PM</div>
+            <div>Maths – 8:00 PM</div>
+        </div> -->
+
+        <!-- LIVE CHAT -->
+        <div class="section">
+            <h2>💬 Live Chat</h2>
+            <div class="chat-box">
+                <iframe src="https://www.youtube.com/live_chat?v=p4NFXvpznfo
+&embed_domain=https://sakshamstudypoint.netlify.app">
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
