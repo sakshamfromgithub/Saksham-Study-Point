@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Videos | Saksham Sir</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+        }
+
+        .header {
+            background: #0d47a1;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .thumb {
+            position: relative;
+        }
+
+        .thumb img {
+            width: 100%;
+            display: block;
+        }
+
+        .play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .info {
+            padding: 12px;
+        }
+
+        .info h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .info p {
+            margin: 6px 0 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        📺 Video Lectures – Saksham Sir
+    </div>
+
+    <div class="container">
+        <div class="grid">
+
+            <!-- VIDEO 1 -->
+            <a href="https://www.youtube.com/watch?v=Ajl9KJ_lfRY" target="_blank">
+                <div class="card">
+                    <div class="thumb">
+                        <img src="https://img.youtube.com/vi/Ajl9KJ_lfRY/hqdefault.jpg">
+                        <div class="play">▶</div>
+                    </div>
+                    <div class="info">
+                        <h3>पत्र लेखन | Class 12 UP Board 2026 | सामान्य हिन्दी | Topper Format | Saksham Sir</h3>
+                        <p>Recorded Lecture</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- VIDEO 2 -->
+            <a href="https://www.youtube.com/watch?v=Objw-PX4Jqk" target="_blank">
+                <div class="card">
+                    <div class="thumb">
+                        <img src="https://img.youtube.com/vi/Objw-PX4Jqk/hqdefault.jpg">
+                        <div class="play">▶</div>
+                    </div>
+                    <div class="info">
+                        <h3>विज्ञान : वरदान या अभिशाप | निबंध | UP Board | Class 10th and 12th</h3>
+                        <p>Recorded Lecture</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- VIDEO 3 -->
+            <a href="https://www.youtube.com/watch?v=pHGIHpBPEOs" target="_blank">
+                <div class="card">
+                    <div class="thumb">
+                        <img src="https://img.youtube.com/vi/pHGIHpBPEOs/hqdefault.jpg">
+                        <div class="play">▶</div>
+                    </div>
+                    <div class="info">
+                        <h3>सामान्य हिन्दी मॉडल पेपर | कक्षा 12 UP Board 2026 | Exam Practice | by Saksham Sir</h3>
+                        <p>Recorded Lecture</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- VIDEO 4 -->
+            <a href="https://www.youtube.com/watch?v=xW5mxssoMzs" target="_blank">
+                <div class="card">
+                    <div class="thumb">
+                        <img src="https://img.youtube.com/vi/xW5mxssoMzs/hqdefault.jpg">
+                        <div class="play">▶</div>
+                    </div>
+                    <div class="info">
+                        <h3>Thermal Expansion & Calorimetry | Class 11 Physics | Heat Transfer | All Boards</h3>
+                        <p>Recorded Lecture</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
