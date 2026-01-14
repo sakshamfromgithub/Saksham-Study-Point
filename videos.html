@@ -28,6 +28,26 @@
             padding: 20px;
         }
 
+        /* PLAYER */
+        .player {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 25px;
+            background: black;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -40,6 +60,7 @@
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
+            cursor: pointer;
         }
 
         .card:hover {
@@ -83,8 +104,54 @@
             color: #666;
         }
 
-        a {
-            text-decoration: none;
+        @media (max-width: 768px) {
+            .player.fixed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 9999;
+                padding-bottom: 56.25%;
+                border-radius: 0;
+            }
+
+            body.video-fixed {
+                padding-top: 56.25vw;
+            }
+        }
+
+        /* MINI CONTROLS */
+        .mini-controls {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: flex;
+            gap: 8px;
+            z-index: 10000;
+        }
+
+        .mini-controls button {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* MINIMIZED MODE */
+        @media (max-width: 768px) {
+            .player.minimized {
+                height: 60px !important;
+                padding-bottom: 0 !important;
+                overflow: hidden;
+            }
+
+            .player.minimized iframe {
+                height: 60px !important;
+            }
         }
     </style>
 </head>
@@ -96,66 +163,139 @@
     </div>
 
     <div class="container">
+
+        <!-- VIDEO PLAYER -->
+        <div class="player">
+            <iframe id="videoPlayer" src="https://www.youtube.com/embed/Objw-PX4Jqk?modestbranding=1&rel=0"
+                allowfullscreen>
+            </iframe>
+            <div class="mini-controls">
+                <button onclick="closePlayer()">✕</button>
+                <button onclick="toggleMute()">🔊</button>
+            </div>
+
+        </div>
+
+        <!-- VIDEO GRID -->
         <div class="grid">
 
-            <!-- VIDEO 1 -->
-            <a href="https://www.youtube.com/watch?v=Ajl9KJ_lfRY" target="_blank">
-                <div class="card">
-                    <div class="thumb">
-                        <img src="https://img.youtube.com/vi/Ajl9KJ_lfRY/hqdefault.jpg">
-                        <div class="play">▶</div>
-                    </div>
-                    <div class="info">
-                        <h3>पत्र लेखन | Class 12 UP Board 2026 | सामान्य हिन्दी | Topper Format | Saksham Sir</h3>
-                        <p>Recorded Lecture</p>
-                    </div>
+            <div class="card" onclick="playVideo('Ajl9KJ_lfRY')">
+                <div class="thumb">
+                    <img src="https://img.youtube.com/vi/Ajl9KJ_lfRY/hqdefault.jpg">
+                    <div class="play">▶</div>
                 </div>
-            </a>
+                <div class="info">
+                    <h3>पत्र लेखन | Class 12 UP Board 2026 | सामान्य हिन्दी</h3>
+                    <p>Recorded Lecture</p>
+                </div>
+            </div>
 
-            <!-- VIDEO 2 -->
-            <a href="https://www.youtube.com/watch?v=Objw-PX4Jqk" target="_blank">
-                <div class="card">
-                    <div class="thumb">
-                        <img src="https://img.youtube.com/vi/Objw-PX4Jqk/hqdefault.jpg">
-                        <div class="play">▶</div>
-                    </div>
-                    <div class="info">
-                        <h3>विज्ञान : वरदान या अभिशाप | निबंध | UP Board | Class 10th and 12th</h3>
-                        <p>Recorded Lecture</p>
-                    </div>
+            <div class="card" onclick="playVideo('Objw-PX4Jqk')">
+                <div class="thumb">
+                    <img src="https://img.youtube.com/vi/Objw-PX4Jqk/hqdefault.jpg">
+                    <div class="play">▶</div>
                 </div>
-            </a>
+                <div class="info">
+                    <h3>विज्ञान : वरदान या अभिशाप | निबंध</h3>
+                    <p>Recorded Lecture</p>
+                </div>
+            </div>
 
-            <!-- VIDEO 3 -->
-            <a href="https://www.youtube.com/watch?v=pHGIHpBPEOs" target="_blank">
-                <div class="card">
-                    <div class="thumb">
-                        <img src="https://img.youtube.com/vi/pHGIHpBPEOs/hqdefault.jpg">
-                        <div class="play">▶</div>
-                    </div>
-                    <div class="info">
-                        <h3>सामान्य हिन्दी मॉडल पेपर | कक्षा 12 UP Board 2026 | Exam Practice | by Saksham Sir</h3>
-                        <p>Recorded Lecture</p>
-                    </div>
+            <div class="card" onclick="playVideo('pHGIHpBPEOs')">
+                <div class="thumb">
+                    <img src="https://img.youtube.com/vi/pHGIHpBPEOs/hqdefault.jpg">
+                    <div class="play">▶</div>
                 </div>
-            </a>
+                <div class="info">
+                    <h3>सामान्य हिन्दी मॉडल पेपर | कक्षा 12</h3>
+                    <p>Recorded Lecture</p>
+                </div>
+            </div>
 
-            <!-- VIDEO 4 -->
-            <a href="https://www.youtube.com/watch?v=xW5mxssoMzs" target="_blank">
-                <div class="card">
-                    <div class="thumb">
-                        <img src="https://img.youtube.com/vi/xW5mxssoMzs/hqdefault.jpg">
-                        <div class="play">▶</div>
-                    </div>
-                    <div class="info">
-                        <h3>Thermal Expansion & Calorimetry | Class 11 Physics | Heat Transfer | All Boards</h3>
-                        <p>Recorded Lecture</p>
-                    </div>
+            <div class="card" onclick="playVideo('xW5mxssoMzs')">
+                <div class="thumb">
+                    <img src="https://img.youtube.com/vi/xW5mxssoMzs/hqdefault.jpg">
+                    <div class="play">▶</div>
                 </div>
-            </a>
+                <div class="info">
+                    <h3>Thermal Expansion & Calorimetry | Class 11 Physics</h3>
+                    <p>Recorded Lecture</p>
+                </div>
+            </div>
 
         </div>
     </div>
+
+
+    <script>
+        const player = document.querySelector(".player");
+        let fixed = false;
+
+        window.addEventListener("scroll", () => {
+            if (window.innerWidth <= 768) {
+                if (window.scrollY > 200 && !fixed) {
+                    player.classList.add("fixed");
+                    document.body.classList.add("video-fixed");
+                    fixed = true;
+                }
+                else if (window.scrollY < 200 && fixed) {
+                    player.classList.remove("fixed");
+                    document.body.classList.remove("video-fixed");
+                    fixed = false;
+                }
+            }
+        });
+
+        function playVideo(id) {
+            document.getElementById("videoPlayer").src =
+                "https://www.youtube.com/embed/" + id + "?autoplay=1&modestbranding=1&rel=0";
+        }
+
+        const playerBox = document.querySelector(".player");
+        const iframe = document.getElementById("videoPlayer");
+
+        let isMuted = false;
+        let startY = 0;
+
+        /* CLOSE */
+        function closePlayer() {
+            iframe.src = "";
+            playerBox.style.display = "none";
+        }
+
+        /* MUTE / UNMUTE */
+        function toggleMute() {
+            isMuted = !isMuted;
+            iframe.contentWindow.postMessage(
+                '{"event":"command","func":"' + (isMuted ? "mute" : "unMute") + '","args":""}',
+                "*"
+            );
+        }
+
+        /* SWIPE DOWN TO MINIMIZE */
+        playerBox.addEventListener("touchstart", e => {
+            startY = e.touches[0].clientY;
+        });
+
+        playerBox.addEventListener("touchmove", e => {
+            let moveY = e.touches[0].clientY;
+            if (moveY - startY > 80) {
+                playerBox.classList.add("minimized");
+            }
+        });
+
+        /* PLAY VIDEO */
+        function playVideo(id) {
+            playerBox.style.display = "block";
+            playerBox.classList.remove("minimized");
+            iframe.src =
+                "https://www.youtube.com/embed/" + id +
+                "?autoplay=1&enablejsapi=1&modestbranding=1&rel=0";
+        }
+
+
+    </script>
+
 
 </body>
 
