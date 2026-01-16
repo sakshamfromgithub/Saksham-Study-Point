@@ -28,34 +28,7 @@
             padding: 20px;
         }
 
-        /* CARDS */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .card:hover {
-            transform: scale(1.03);
-        }
-
-        .card h3 {
-            margin: 0;
-            color: #7b1c1c;
-        }
-
-        /* QUIZ */
         .quiz-box {
-            display: none;
             background: #fff;
             padding: 25px;
             border-radius: 10px;
@@ -63,9 +36,8 @@
         }
 
         .timer {
-            font-size: 16px;
-            color: #7b1c1c;
             text-align: right;
+            color: #7b1c1c;
         }
 
         .question {
@@ -80,18 +52,6 @@
             background: #eee;
             border-radius: 6px;
             cursor: pointer;
-        }
-
-        .options input {
-            margin-right: 8px;
-        }
-
-        .correct {
-            background: #c8f7c5 !important;
-        }
-
-        .wrong {
-            background: #f7c5c5 !important;
         }
 
         button {
@@ -112,149 +72,64 @@
 
 <body>
 
-    <div class="header">📝 Quiz Section – Saksham Study Point</div>
-
-    <h3 style="text-align: center;">This page is in development please experience it and give feedback <a
+    <div class="header">📝 Online Test – Saksham Study Point</div>
+    <div style="text-align:center;margin-top:40px" id="startScreen">
+        <h3 style="text-align: center;">This page is in development please experience it and give feedback <a
             href="mailto:sakshamsrivastav779@gmail.com">Click here</a></h3>
+        <button onclick="startTest()" style="font-size:18px;padding:15px 30px">
+            ▶ Start Test
+        </button>
+    </div>
+
 
     <div class="container">
-
-        <!-- CLASS + SUBJECT -->
-        <div id="selectBox">
-            <h2>Select Class</h2>
-            <div class="cards">
-                <div class="card" onclick="selectSubject('Class 10')">
-                    <h3>Class 10</h3>
-                </div>
-                <div class="card" onclick="selectSubject('Class 12')">
-                    <h3>Class 12</h3>
-                </div>
-            </div>
-        </div>
-
-        <div id="subjectBox" style="display:none">
-            <h2>Select Subject</h2>
-            <div class="cards">
-                <div class="card" onclick="startQuiz('Physics')">
-                    <h3>Physics</h3>
-                </div>
-                <div class="card" onclick="startQuiz('Hindi')">
-                    <h3>Hindi</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- QUIZ -->
-        <div class="quiz-box" id="quizBox">
+        <div class="quiz-box" id="quizBox" style="display: none;">
             <div class="timer">⏱ Time Left: <span id="time">300</span> sec</div>
-
             <div class="question" id="question"></div>
             <div class="options" id="options"></div>
             <button onclick="nextQuestion()">Next</button>
         </div>
-
     </div>
 
-    <!-- FULLSCREEN WARNING MODAL -->
-    <div id="fsModal" style="
-    display:none;
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:rgba(0,0,0,0.7);
-    z-index:9999;
-    justify-content:center;
-    align-items:center;
-    ">
-        <div style="
-        background:#fff;
-        padding:25px;
-        border-radius:10px;
-        text-align:center;
-        max-width:300px;
-        ">
+    <!-- FULLSCREEN WARNING -->
+    <div id="fsModal"
+        style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:20px;border-radius:10px;text-align:center;">
             <h3>⚠ Fullscreen Required</h3>
-            <p>Test continue karne ke liye fullscreen zaroori hai.</p>
-            <button onclick="enableFullscreen()">Enable Fullscreen</button>
-            <br><br>
+            <button onclick="enableFullscreen()">Enable Fullscreen</button><br><br>
             <button onclick="exitTest()" style="background:#555">Exit Test</button>
         </div>
     </div>
 
-
     <script>
-        const quizData = [
-            {
-                q: "1. किसी चालक में विद्युत धारा बढ़ाने पर उसका प्रतिरोध",
-                options: ["A. बढ़ता है", "B. घटता है", "C. समान रहता है", "D. शून्य हो जाता है"],
-                answer: 1
-            },
-            {
-                q: "2. एक बल्ब और एक हीटर को समान वोल्टेज पर जोड़ा गया है। इनमें से अधिक विद्युत धारा किसमें प्रवाहित होगी?",
-                options: ["A. बल्ब में", "B. हीटर में", "C. दोनों में समान", "D. कोई नहीं"],
-                answer: 1
-            },
-            {
-                q: "3. यदि किसी चालक का तापमान बढ़ाया जाए, तो उसका प्रतिरोध सामान्यतः",
-                options: [
-                    "A. घटता है",
-                    "B. समान रहता है",
-                    "C. बढ़ता है",
-                    "D. शून्य हो जाता है"
-                ],
-                answer: 2
-            },
-            {
-                q: "4. विद्युत शक्ति का सही सूत्र कौन-सा है?",
-                options: [
-                    "A. V = IR",
-                    "B. P = VI",
-                    "C. R = V/I",
-                    "D. I = V/R"
-                ],
-                answer: 1
-            },
-            {
-                q: "5. यदि एक विद्युत परिपथ में धारा दोगुनी कर दी जाए, तो उत्पन्न ऊष्मा",
-                options: [
-                    "A. दोगुनी होगी",
-                    "B. आधी होगी",
-                    "C. चार गुनी होगी",
-                    "D. समान रहेगी"
-                ],
-                answer: 2
-            }
-        ];
-        let selectedClass = "";
-
+        let quizData = [];
         let index = 0;
         let score = 0;
-
-        /* TOTAL QUIZ TIMER (5 minutes example) */
         let totalTime = 300;
         let quizTimer;
 
-        function startQuiz() {
-            document.getElementById("subjectBox").style.display = "none";
+        function startTest() {
+            document.getElementById("startScreen").style.display = "none";
             document.getElementById("quizBox").style.display = "block";
 
-            enableFullscreen();   // 🔥 fullscreen auto start
+            enableFullscreen();
             loadQuestion();
             startTimer();
         }
 
+        /* 🔥 AUTO START QUIZ */
+        window.onload = () => {
 
-        function selectSubject(cls) {
-            selectedClass = cls;
-            document.getElementById("selectBox").style.display = "none";
-            document.getElementById("subjectBox").style.display = "block";
-        }
+            fetch("questions.json")
+                .then(res => res.json())
+                .then(data => quizData = data);
+
+        };
 
         function startTimer() {
             quizTimer = setInterval(() => {
                 totalTime--;
                 document.getElementById("time").innerText = totalTime;
-
                 if (totalTime <= 0) {
                     clearInterval(quizTimer);
                     showResult();
@@ -264,81 +139,55 @@
 
         function loadQuestion() {
             const q = quizData[index];
-            document.getElementById("question").innerText =
-                (index + 1) + ". " + q.q;
-
+            document.getElementById("question").innerText = (index + 1) + ". " + q.q;
             const optionsBox = document.getElementById("options");
             optionsBox.innerHTML = "";
-
             q.options.forEach((opt, i) => {
                 optionsBox.innerHTML += `
-            <label>
-                <input type="radio" name="option" value="${i}">
-                ${opt}
-            </label>
-        `;
+        <label>
+            <input type="radio" name="option" value="${i}">
+            ${opt}
+        </label>`;
             });
         }
 
         function nextQuestion() {
             const selected = document.querySelector('input[name="option"]:checked');
+            if (!selected) return alert("select an option!");
 
-            if (!selected) {
-                alert("Please select an option");
-                return;
-            }
-
-            if (parseInt(selected.value) === quizData[index].answer) {
-                score++;
-            }
-
+            if (parseInt(selected.value) === quizData[index].answer) score++;
             index++;
 
-            if (index < quizData.length) {
-                loadQuestion();
-            } else {
-                clearInterval(quizTimer);
-                showResult();
-            }
+            if (index < quizData.length) loadQuestion();
+            else showResult();
         }
 
         function showResult() {
+            clearInterval(quizTimer);
             document.getElementById("quizBox").innerHTML = `
-        <div class="result">
-            📝 Quiz Finished<br><br>
-            Total Questions: <b>${quizData.length}</b><br>
-            Correct Answers: <b>${score}</b><br>
-            Score: <b>${score} / ${quizData.length}</b>
-            
-            <a href="index.html"><br><br><button>Go to Home</button></a>
-            <a href="quiz.html"><br><br><button>Restart Quiz</button></a>
-        </div>
-    `;
+    <div class="result">
+        Test Finished ✅<br><br>
+        Score: <b>${score} / ${quizData.length}</b><br><br>
+        <a href="quiz.html"><button>Restart</button></a>
+    </div>`;
         }
 
-        /* ---------- FULLSCREEN FUNCTIONS ---------- */
-
+        /* FULLSCREEN */
         function enableFullscreen() {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            }
+            document.documentElement.requestFullscreen();
             document.getElementById("fsModal").style.display = "none";
         }
 
         function exitTest() {
-            alert("Test exited");
-            location.reload(); // ya redirect to home page
+            location.href = "index.html";
         }
 
-        /* Detect fullscreen exit */
         document.addEventListener("fullscreenchange", () => {
             if (!document.fullscreenElement) {
                 document.getElementById("fsModal").style.display = "flex";
             }
         });
     </script>
-
 
 </body>
 
