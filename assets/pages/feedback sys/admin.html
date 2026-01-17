@@ -125,7 +125,7 @@
             { keywords: ["hi", "hello", "namaste"], reply: "Hello 😊, apna doubt likhiye." },
             { keywords: ["physics"], reply: "Physics ka question clear likhiye." },
             { keywords: ["math", "maths"], reply: "Maths me step wise solution zaroori hota hai." },
-            { keywords: ["fee", "fees"], reply: "Fees related details admin batayega." }
+            { keywords: ["fee", "fees"], reply: "Fees related details admin sir btayenge." }
         ];
 
         db.collection("chats")
@@ -180,7 +180,7 @@
         }
 
         function autoReplyOnce(studentText, chatId, messageId) {
-            let replyText = "Message mil gaya hai 👍, thoda wait kijiye.";
+            let replyText = "please wait...Connecting to Saksham Sir";
             const t = studentText.toLowerCase();
 
             for (let r of autoReplies) {
