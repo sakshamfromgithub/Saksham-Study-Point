@@ -88,7 +88,7 @@ onAuthStateChanged(auth, async (user) => {
 window.logout = async function () {
   await signOut(auth);
   // window.location.href = "logsign.html";
-  openModal();
+  // openModal();
 };
 
 // ================= PDF PROTECTION =================
