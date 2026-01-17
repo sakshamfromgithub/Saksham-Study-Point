@@ -168,7 +168,7 @@ window.login = async function () {
   const password = document.getElementById("loginPassword").value;
 
   if (!email || !password) {
-    alert("Email aur Password dono bharo");
+    alert("fill both email and password");
     return;
   }
 
