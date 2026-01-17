@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            background: #f5f7fb;
+        }
+
+        .list {
+            width: 30%;
+            background: white;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+        }
+
+        .list div {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .list div:hover {
+            background: #f0f4ff;
+        }
+
+        .chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+        }
+
+        .msg {
+            max-width: 70%;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .student {
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .admin {
+            background: #c7f5d9;
+            margin-left: auto;
+        }
+
+        .sendBox {
+            display: flex;
+            padding: 10px;
+            gap: 8px;
+            background: white;
+            border-top: 1px solid #ddd;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: none;
+            background: #1e3c72;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="list" id="chatList"></div>
+
+    <div class="chat">
+        <div id="messages"></div>
+        <div class="sendBox">
+            <input id="msg" placeholder="Reply...">
+            <button onclick="send()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        firebase.initializeApp({
+            apiKey: "AIzaSyBbv58b5sR5WOP024Dg7V0hWfkDm9c6kVA",
+            authDomain: "myserv-9812e.firebaseapp.com",
+            projectId: "myserv-9812e"
+        });
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        auth.signInWithEmailAndPassword("admin123@ssp.com", "123456");
+
+        const chatList = document.getElementById("chatList");
+        const messages = document.getElementById("messages");
+
+        let currentChat = null;
+
+        const autoReplies = [
+            { keywords: ["hi", "hello", "namaste"], reply: "Hello 😊, apna doubt likhiye." },
+            { keywords: ["physics"], reply: "Physics ka question clear likhiye." },
+            { keywords: ["math", "maths"], reply: "Maths me step wise solution zaroori hota hai." },
+            { keywords: ["fee", "fees"], reply: "Fees related details admin batayega." }
+        ];
+
+        db.collection("chats")
+            .orderBy("lastTime", "desc")
+            .onSnapshot(snapshot => {
+                chatList.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const c = doc.data();
+                    const div = document.createElement("div");
+                    div.innerText = `${c.studentName} → ${c.lastMessage}`;
+                    div.onclick = () => openChat(doc.id);
+                    chatList.appendChild(div);
+                });
+            });
+
+        function openChat(chatId) {
+            currentChat = chatId;
+
+            db.collection("messages")
+                .where("chatId", "==", chatId)
+                .orderBy("time")
+                .onSnapshot(snapshot => {
+                    messages.innerHTML = "";
+                    snapshot.forEach(doc => {
+                        const m = doc.data();
+                        const div = document.createElement("div");
+                        div.className = "msg " + m.sender;
+                        div.innerText = m.text;
+                        messages.appendChild(div);
+
+                        if (m.sender === "student" && !m.replied) {
+                            autoReplyOnce(m.text, chatId, doc.id);
+                        }
+                    });
+                    messages.scrollTop = messages.scrollHeight;
+                });
+        }
+
+        function send() {
+            if (!currentChat) return;
+            const text = document.getElementById("msg").value.trim();
+            if (!text) return;
+
+            db.collection("messages").add({
+                chatId: currentChat,
+                sender: "admin",
+                text: text,
+                time: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            document.getElementById("msg").value = "";
+        }
+
+        function autoReplyOnce(studentText, chatId, messageId) {
+            let replyText = "Message mil gaya hai 👍, thoda wait kijiye.";
+            const t = studentText.toLowerCase();
+
+            for (let r of autoReplies) {
+                if (r.keywords.some(k => t.includes(k))) {
+                    replyText = r.reply;
+                    break;
+                }
+            }
+
+            db.collection("messages").doc(messageId).update({
+                replied: true
+            });
+
+            setTimeout(() => {
+                db.collection("messages").add({
+                    chatId: chatId,
+                    sender: "admin",
+                    text: replyText,
+                    time: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            }, 1200);
+        }
+    </script>
+
+</body>
+
+</html>
