@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Feedback</title>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background: maroon;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        input {
+            margin: 10px;
+            padding: 12px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+
+        #chat {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .msg {
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .student {
+            background: #dcf8c6;
+            margin-left: auto;
+        }
+
+        .admin {
+            background: #fff;
+            margin-right: auto;
+            border: 1px solid #ddd;
+        }
+
+        .sendBox {
+            display: flex;
+            padding: 10px;
+            gap: 8px;
+        }
+
+        button {
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: none;
+            background: maroon;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>Student Feedback</header>
+
+    <input id="name" placeholder="Your Name (required)">
+    <div id="chat"></div>
+
+    <div class="sendBox">
+        <input id="msg" placeholder="Type your message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        firebase.initializeApp({
+            apiKey: "AIzaSyBbv58b5sR5WOP024Dg7V0hWfkDm9c6kVA",
+            authDomain: "myserv-9812e.firebaseapp.com",
+            projectId: "myserv-9812e"
+        });
+
+        const db = firebase.firestore();
+        const chat = document.getElementById("chat");
+
+        let chatId = localStorage.getItem("chatId");
+        if (!chatId) {
+            chatId = Date.now().toString();
+            localStorage.setItem("chatId", chatId);
+        }
+
+        function sendMessage() {
+            const name = document.getElementById("name").value.trim();
+            const text = document.getElementById("msg").value.trim();
+
+            if (!name) {
+                alert("Please enter your name first");
+                return;
+            }
+            if (!text) return;
+
+            db.collection("messages").add({
+                chatId: chatId,
+                sender: "student",
+                studentName: name,
+                text: text,
+                replied: false,
+                time: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            db.collection("chats").doc(chatId).set({
+                studentName: name,
+                lastMessage: text,
+                lastTime: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            document.getElementById("msg").value = "";
+        }
+
+        db.collection("messages")
+            .where("chatId", "==", chatId)
+            .orderBy("time")
+            .onSnapshot(snapshot => {
+                chat.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const m = doc.data();
+                    const div = document.createElement("div");
+                    div.className = "msg " + m.sender;
+                    div.innerText = m.text;
+                    chat.appendChild(div);
+                });
+                chat.scrollTop = chat.scrollHeight;
+            });
+    </script>
+
+</body>
+
+</html>
